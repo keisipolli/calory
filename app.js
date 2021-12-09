@@ -1,52 +1,44 @@
-// Module pattern basic structure
-(function(){
-    // Declare private variables and functions
+// Storage Controller
+// Create later
 
-    return {
-        // Declare public variables and functions
+// Item Controller
+const ItemCtrl = (function(){
+    // Item Constructor
+    const Item = function(id, name, calories){
+        this.id = id
+        this.name = name
+        this.calories = calories
     }
-})();
-
-// Standard module pattern
-// It will be UI Controller
-const UIController = (function(){
-    let text = "Hello World"
-
-    const changeText = function(){
-        const element = document.querySelector("h1")
-        element.textContent = text
+    // Data Structure
+    const data = {
+        items: [
+            {id: 0, name: "Steak Dinner", calories: 1200},
+            {id: 1, name: "Cookie", calories: 400},
+            {id: 2, name: "Eggs", calories: 300}
+        ],
+        total: 0
     }
-    return {
-        callChangeText: function(){
-            changeText()
-            console.log(text)
+
+    return{
+        logData: function(){
+            return data
         }
     }
 })();
 
-UIController.callChangeText()
+// UI Controller
+const UICtrl = (function(){
 
-// Revealing module pattern
-// It will be Item Controller
-const ItemController = (function(){
-    let data = []
-
-    function add(item){
-        data.push(item)
-        console.log("Item is added")
-    }
-
-    function get(id){
-        return data.find(item => {
-            return item.id === id
-        })
-    }
-
-    return {
-        add: add,
-        get: get
-    }
 })();
 
-ItemController.add({id: 1, name: "Kate"})
-console.log(ItemController.get(1))
+// App Controller
+const App = (function(ItemCtrl, UICtrl){
+    return {
+        init: function(){
+            console.log("Initializing App")
+        }
+    }
+})(ItemCtrl, UICtrl);
+
+// Initialize App
+App.init()
